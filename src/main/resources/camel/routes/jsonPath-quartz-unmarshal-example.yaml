@@ -1,0 +1,13 @@
+- route: 
+    id: "jsonpath-example-route-one"
+    from:
+     uri: "quartz:quarterJsonPath?cron={{start.cron.exp}}"
+     steps: 
+     -  setBody: 
+          simple: "{{jsonpath.sample.req}}" 
+     -  process:
+         ref: jsonToMapProcessor
+     -  log: "the  final object ${body}"  
+     -  process: 
+         ref: snowFlakeProcessor
+     
