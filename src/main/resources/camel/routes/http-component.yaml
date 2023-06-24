@@ -11,4 +11,9 @@
       - log: "the bank name {{bank.code}}"
       - to:
           uri: "{{url}}?maxTotalConnections=100&httpMethod=POST"
-      - log: "${body} the bank code {{bank.code}}"
+      -  process:
+          ref: jsonToMapProcessor
+      -  log: "the  final object ${body}"  
+      -  process: 
+          ref: snowFlakeProcessor
+      -  log: "${body} the bank code {{bank.code}}"
