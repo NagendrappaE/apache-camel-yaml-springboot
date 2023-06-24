@@ -1,0 +1,24 @@
+- route:
+    id: "route-file-one"
+    from:
+     uri: "file:{{sourcepath}}/PIN"
+    
+    steps:  
+     - process:
+        ref: upperCaseProcessor
+     - log: "HIII ${header.CamelFileName}"   
+ 
+     - to: "file:{{sourcepath}}/POUT"
+     
+ 
+- route:
+    id: "route-file-two"
+    from:
+     uri: "file:{{sourcepath}}/PIN2"
+    
+    steps:  
+     - process:
+        ref: upperCaseProcessor
+     - log: "HIII ${header.CamelFileName}"   
+ 
+     - to: "file:{{sourcepath}}/POUT"    

@@ -1,0 +1,12 @@
+- route:
+    id: "route-file-three"
+    from:
+     uri: "file:{{sourcepath}}"
+     parameters: 
+        doneFileName: ${file:name}.done
+        moveFailed: ./Error
+        flatten : true
+    steps:
+       - log: "the received body :::: ${body}"
+       - to: "file:{{destinationPath}}?fileName=copy-of-${file:name}&doneFileName=${file:name.noext}.done"
+    
