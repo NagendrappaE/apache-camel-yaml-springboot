@@ -7,8 +7,8 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 @Component
 public class JsonToMapProcessor implements Processor {
@@ -18,21 +18,17 @@ public class JsonToMapProcessor implements Processor {
 
 		String jsonDataSourceString = exchange.getIn().getBody(String.class);
 
-		ObjectMapper objectMapper = new ObjectMapper();
-
-		TypeReference<Map<String, Object>> mapType = new TypeReference<Map<String, Object>>() {
+		TypeToken<Map<String, Object>> typeToken = new TypeToken<Map<String, Object>>() {
 		};
-		Map<String, Object> map = objectMapper.readValue(jsonDataSourceString, mapType);
 
-		Object obj = map.get("data");
+		Gson gson = new Gson();
+		Map<String, Object> map = gson.fromJson(jsonDataSourceString, typeToken.getType());
 
-		String respo = objectMapper.writeValueAsString(obj);
+		// Access the elements in the map
+		Map<String, Object> data = (Map<String, Object>) map.get("data");
+		List<Object> jacklist = (List<Object>) data.get("organizationalProcess");
 
-		List<Map<String, Object>> jacklist = objectMapper.readValue(respo.toString(),
-				new TypeReference<List<Map<String, Object>>>() {
-				});
-
-		System.out.println(jacklist);
+		// System.out.println(jacklist);
 
 		exchange.getIn().setBody(jacklist);
 
