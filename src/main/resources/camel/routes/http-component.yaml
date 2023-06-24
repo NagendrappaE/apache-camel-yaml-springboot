@@ -1,0 +1,14 @@
+- route:
+    id: "foo"
+    autoStartup: true
+    from:
+      uri: "quartz:foo?cron={{start.cron.exp}}"
+    steps:
+      - to: "bean:studentService?method=hello"
+      - log: "${body}"
+      - to: "freemarker:query.ftl"
+      - log: "${body}"
+      - log: "the bank name {{bank.code}}"
+      - to:
+          uri: "{{url}}?maxTotalConnections=100"
+      - log: "${body} the bank code {{bank.code}}"
