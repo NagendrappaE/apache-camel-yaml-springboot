@@ -1,6 +1,5 @@
 package com.ece.camel.yaml.spring.processor;
 
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
@@ -8,8 +7,8 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.springframework.stereotype.Component;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class JsonToMapProcessor implements Processor {
@@ -18,16 +17,33 @@ public class JsonToMapProcessor implements Processor {
 	public void process(Exchange exchange) throws Exception {
 
 		String jsonDataSourceString = exchange.getIn().getBody(String.class);
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		TypeReference<Map<String, Object>> mapType = new TypeReference<Map<String, Object>>() {};
+		Map<String, Object> map = objectMapper.readValue(jsonDataSourceString, mapType);
+		
+
+		List<Map<String, Object>> jacklist = (List<Map<String, Object>>) map.get("data");
 
 		
-		Gson gson = new Gson();
+		/*
+		 * Gson gson = new Gson();
+		 * 
+		 * Type mapType = new TypeToken<HashMap<String, Object>>() { }.getType();
+		 * HashMap<String, Object> map = gson.fromJson(jsonDataSourceString, mapType);
+		 * 
+		 * List<HashMap<String, Object>> dataList = (List<HashMap<String, Object>>)
+		 * map.get("data");
+		 */
+		
 
-		Type mapType = new TypeToken<Map<String, Object>>() {
-		}.getType();
-		Map<String, Object> map = gson.fromJson(jsonDataSourceString, mapType);
 
-		List<Map<String, Object>> dataList = (List<Map<String, Object>>) map.get("data");
+		
+	//	List<Map<String, Object>> jacklist = objectMapper.readValue(jsonDataSourceString, new TypeReference<List<Map<String, Object>>>(){});
 
+		
+		
 		/*
 		 * Configuration configuration =
 		 * Configuration.builder().options(Option.SUPPRESS_EXCEPTIONS).build();
@@ -39,9 +55,9 @@ public class JsonToMapProcessor implements Processor {
 		 * JsonPath.parse(s2,configuration).read("$['data']", expensiveFilter);
 		 */
 
-		System.out.println(dataList);
+		System.out.println(jacklist);
 
-		exchange.getIn().setBody(dataList);
+		exchange.getIn().setBody(jacklist);
 
 	}
 
