@@ -10,5 +10,5 @@
       - log: "${body}"
       - log: "the bank name {{bank.code}}"
       - to:
-          uri: "{{url}}?maxTotalConnections=100"
+          uri: "{{url}}?maxTotalConnections=100&httpMethod=POST"
       - log: "${body} the bank code {{bank.code}}"
