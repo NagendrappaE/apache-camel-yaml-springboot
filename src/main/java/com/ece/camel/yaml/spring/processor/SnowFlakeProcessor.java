@@ -5,6 +5,7 @@ package com.ece.camel.yaml.spring.processor;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
@@ -30,7 +31,10 @@ public class SnowFlakeProcessor implements Processor {
 
 				Map<String, Object> row = (Map<String, Object>) exchangelist.next();
 
+				Set<String> colums = row.keySet();
+
 				System.out.println("the row" + row);
+				System.out.println("the row" + colums);
 			}
 
 		} catch (Exception e) {

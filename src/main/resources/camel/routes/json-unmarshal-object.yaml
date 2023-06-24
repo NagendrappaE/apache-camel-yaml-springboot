@@ -1,0 +1,20 @@
+- route:
+   id: "timer-route-json-unmarshal"
+   from:
+    uri: "timer:jsstrTimer" 
+    parameters: 
+      fixedRate: true
+      period: 10000
+    steps:
+      -  setBody:
+            simple: "{{jsonpath.sample.req}}"  
+      -  unmarshal:
+           json:
+             unmarshalType: com.ece.camel.yaml.spring.bean.HopexResponse
+      -  log: "${body}"    
+      
+      -  marshal:
+            json: {}
+      -  log: "the marshalled data ${body}"          
+        
+        
