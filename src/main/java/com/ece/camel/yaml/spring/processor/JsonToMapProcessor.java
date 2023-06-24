@@ -1,5 +1,7 @@
 package com.ece.camel.yaml.spring.processor;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,14 +19,6 @@ public class JsonToMapProcessor implements Processor {
 	public void process(Exchange exchange) throws Exception {
 
 		String jsonDataSourceString = exchange.getIn().getBody(String.class);
-		
-		ObjectMapper objectMapper = new ObjectMapper();
-		
-		TypeReference<Map<String, Object>> mapType = new TypeReference<Map<String, Object>>() {};
-		Map<String, Object> map = objectMapper.readValue(jsonDataSourceString, mapType);
-		
-
-		List<Map<String, Object>> jacklist = (List<Map<String, Object>>) map.get("data");
 
 		
 		/*
@@ -37,7 +31,26 @@ public class JsonToMapProcessor implements Processor {
 		 * map.get("data");
 		 */
 		
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		TypeReference<LinkedHashMap<String, Object>> mapType = new TypeReference<LinkedHashMap<String, Object>>() {};
+		LinkedHashMap<String, Object> map = objectMapper.readValue(jsonDataSourceString, mapType);
+		
+		List<LinkedHashMap<String, Object>> jacklist=new ArrayList<>();
+		
+        List<Map.Entry<String, Object>> list = new ArrayList<>(map.entrySet());
+        
+        for (Map.Entry<String, Object> entry : list) {
+        	
+        	Map<String, Object> objMap = new LinkedHashMap<>();
+        	objMap.put(entry.getKey(), entry.getValue());
+            jacklist.add(map);
+            
+            
+        	
+        }
 
+		
 
 		
 	//	List<Map<String, Object>> jacklist = objectMapper.readValue(jsonDataSourceString, new TypeReference<List<Map<String, Object>>>(){});
