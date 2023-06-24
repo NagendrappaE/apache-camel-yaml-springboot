@@ -1,0 +1,16 @@
+-  route:
+     id: "sql-route-one"
+     from:
+      uri: "timer:sqlTimer"
+      parameters:
+        fixedRate: true
+        period: 10000
+      steps:
+      - setBody: 
+          simple:
+           constant: "iamm"
+      - log: "${body}"   
+      - to: "sql:INSERT INTO TEST(RQST, RESP,AGE) VALUES(:#${body}, ':{{bank.code}}','28')"
+        
+         
+         
