@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SnowFlakeProcessor implements Processor {
 
+	
 	@Override
 	public void process(Exchange exchange) throws Exception {
 

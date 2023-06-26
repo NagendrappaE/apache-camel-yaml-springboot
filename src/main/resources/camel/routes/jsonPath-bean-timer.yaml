@@ -1,0 +1,19 @@
+- route: 
+    id: "jsonpath-bean-route-one"
+    from:
+     uri: "timer:sqlTimer"
+     parameters:
+        fixedRate: true
+        period: 10000
+     steps: 
+     -  setBody: 
+          simple: "{\"data\":{\"organizationalProcess\":[{\"id\":\"Sibhhhhh\",\"name\":\"[Duplicated - CHARVE] Organization processs\",\"organizationalProcess_OwnerOrganizationalProcess\":[{\"id\":\"p(xyxyyx\",\"name\":\"notification of municiplabond default Distributions\"}]},{\"id\":\"NRPu1hhhhhhhh\",\"name\":\"Adding CUIPS Manually\",\"organizationalProcess_OwnerOrganizationalProcess\":[]}]}}" 
+     -  to: "file:{{destinationPath}}?fileName=output-${date:now:yyyyMMddHHmmssSSS}.json"
+     - log: "the header ${headers}"
+     -  bean:
+         ref: headerConfigurer
+         method: "process(${header.CamelFileNameProduced},'.data.organizationalProcess','body','.data.organizationalProcess')"
+     -  log: "the  final object ${body}"  
+     -  process: 
+         ref: snowFlakeProcessor
+     
