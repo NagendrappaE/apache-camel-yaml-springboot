@@ -1,8 +1,8 @@
 - route:
-    id: "foo"
+    id: "foo-one"
     autoStartup: true
     from:
-      uri: "quartz:foo?cron={{start.cron.exp}}"
+      uri: "timer:httpTimer"
     steps:
       - to: "bean:studentService?method=hello"
       - log: "${body}"
@@ -11,9 +11,20 @@
       - log: "the bank name {{bank.code}}"
       - to:
           uri: "{{url}}?maxTotalConnections=100&httpMethod=POST"
-      -  process:
-          ref: jsonToMapProcessor
-      -  log: "the  final object ${body}"  
-      -  process: 
+      - to: "file:{{destinationPath}}?fileName=output-${date:now:yyyyMMddHHmmssSSS}.json&doneFileName=${file:name}.done"
+      
+      
+- route:
+    id: "foo-two"    
+    
+    from: 
+      uri: "file:{{destinationPath}}?doneFileName=${file:name}.done"   
+    steps:
+      - bean:
+         ref: headerConfigurer
+         method: "process(${header.CamelFileNameProduced},'.data.organizationalProcess','body','.data.organizationalProcess')"
+      
+      - log: "the  final object ${body}"  
+      - process: 
           ref: snowFlakeProcessor
-      -  log: "${body} the bank code {{bank.code}}"
+      - log: "${body} the bank code {{bank.code}}"
