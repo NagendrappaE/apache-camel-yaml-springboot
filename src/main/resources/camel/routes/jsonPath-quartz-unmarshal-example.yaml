@@ -5,9 +5,9 @@
      steps: 
      -  setBody: 
           simple: "{{jsonpath.sample.req}}" 
-     -  process:
-         ref: jsonToMapProcessor
+    # -  process:
+    #     ref: jsonToMapProcessor
      -  log: "the  final object ${body}"  
-     -  process: 
-         ref: snowFlakeProcessor
+  #   -  process: 
+   #      ref: snowFlakeProcessor
      

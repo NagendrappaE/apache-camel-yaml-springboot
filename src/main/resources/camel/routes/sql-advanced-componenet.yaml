@@ -1,0 +1,22 @@
+- route: 
+    id: "sql-advanced-componenet-route"
+    from:
+     uri: "timer:sqlTimer-advanced"
+     parameters:
+        fixedRate: true
+        period: 10000
+     steps: 
+     -  setBody: 
+          simple: "SELECT  RQST AS rst,RESP  AS rsp,AGE AS ag FROM test" 
+    
+     -  to:
+         uri: "sql:"
+       
+         parameters:
+          useMessageBodyForSql: true
+          outputType: StreamList
+     -  log: "streamed ${body}"  
+     
+     -  process: 
+         ref: snowFlakeProcessor   
+          
