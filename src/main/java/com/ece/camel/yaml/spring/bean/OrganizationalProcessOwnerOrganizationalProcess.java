@@ -1,7 +1,8 @@
 package com.ece.camel.yaml.spring.bean;
 
-public class OrganizationalProcessOwnerOrganizationalProcess {
-	public String id;
+public class OrganizationalProcessOwnerOrganizationalProcess{
+    public String id;
+    public String name;
 	public String getId() {
 		return id;
 	}
@@ -14,5 +15,4 @@ public class OrganizationalProcessOwnerOrganizationalProcess {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String name;
 }

@@ -11,20 +11,15 @@
       - log: "the bank name {{bank.code}}"
       - to:
           uri: "{{url}}?maxTotalConnections=100&httpMethod=POST"
-      - to: "file:{{destinationPath}}?fileName=output-${date:now:yyyyMMddHHmmssSSS}.json&doneFileName=${file:name}.done"
+      -  unmarshal:
+           json: {}
+      - set-body:
+          simple: "${body[data]}"   
+             
+      -  log: "${body}"   
       
-      
-- route:
-    id: "foo-two"    
-    
-    from: 
-      uri: "file:{{destinationPath}}?doneFileName=${file:name}.done"   
-    steps:
-      - bean:
-         ref: headerConfigurer
-         method: "process(${header.CamelFileNameProduced},'.data.organizationalProcess','body','.data.organizationalProcess')"
-      
-      - log: "the  final object ${body}"  
+      - set-body:
+          simple: "${body[organizationalProcess]}" 
       - process: 
           ref: snowFlakeProcessor
-      - log: "${body} the bank code {{bank.code}}"
+      

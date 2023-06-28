@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ece.camel.yaml.spring.bean.Data;
 import com.ece.camel.yaml.spring.bean.Datum;
 import com.ece.camel.yaml.spring.bean.HopexResponse;
+import com.ece.camel.yaml.spring.bean.OrganizationalProcess;
 import com.ece.camel.yaml.spring.bean.OrganizationalProcessOwnerOrganizationalProcess;
+import com.ece.camel.yaml.spring.bean.Root;
 import com.ece.camel.yaml.spring.bean.StudentResp;
 
 @RequestMapping
@@ -34,12 +37,14 @@ public class StudentController {
 	}
 
 	@PostMapping("getapex")
-	public HopexResponse getApexRespo(HttpServletRequest request, HttpServletResponse response) {
+	public Root getApexRespo(HttpServletRequest request, HttpServletResponse response) {
 
 		System.out.println("the IP address " + request.getRemoteAddr());
 
 		ArrayList<Datum> dataList = new ArrayList<>();
 		Datum daa = new Datum();
+
+		Root root = new Root();
 
 		ArrayList<OrganizationalProcessOwnerOrganizationalProcess> organizationalProcess_OwnerOrganizationalProces = new ArrayList<>();
 
@@ -61,7 +66,23 @@ public class StudentController {
 		HopexResponse resp = new HopexResponse();
 		resp.setData(dataList);
 
-		return resp;
+		Data data = new Data();
+
+		ArrayList<OrganizationalProcess> organizationalProcessList = new ArrayList<>();
+		OrganizationalProcess organizationalProcess = new OrganizationalProcess();
+		organizationalProcess.setId("Sibhhhhh");
+		organizationalProcess.setName("[Duplicated - CHARVE] Organization processs");
+		organizationalProcess
+				.setOrganizationalProcess_OwnerOrganizationalProcess(organizationalProcess_OwnerOrganizationalProces);
+
+		for (int i = 0; i < 2; i++) {
+			organizationalProcessList.add(organizationalProcess);
+		}
+		
+		data.setOrganizationalProcess(organizationalProcessList);
+		root.setData(data);
+
+		return root;
 
 	}
 
