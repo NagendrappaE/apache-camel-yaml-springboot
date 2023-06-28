@@ -6,8 +6,12 @@
         fixedRate: true
         period: 10000
      steps: 
+     -  setHeader:
+          name: randomUUID
+          simple: "${uuid(simple}"
+          
      -  setBody: 
-          simple: "SELECT  RQST AS rst,RESP  AS rsp,AGE AS ag FROM test" 
+          simple: "SELECT '${header.randomUUID}' as ETL_ID, RQST AS rst,RESP  AS rsp,AGE AS ag FROM test" 
     
      -  to:
          uri: "sql:"
@@ -19,4 +23,5 @@
      
      -  process: 
          ref: snowFlakeProcessor   
-          
+           
+                
