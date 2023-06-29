@@ -3,6 +3,8 @@
     from:
       uri: 'timer:startmulti?repeatCount=1'
     steps:
+      - to: "{{url}}?maxTotalConnections=100&httpMethod=POST"
+    
       - multicast:
           parallelProcessing: true
           aggregationStrategy: '#bean:arrayListAggregationStrategy'
@@ -19,10 +21,13 @@
           simple: "${uuid(simple}"
      -  setHeader:
           name: jsonStr
-          simple: "{{jsonpath.sample.req}}"   
+          method:
+             ref: headerConfigurer
+             method: "doSome(${body})"
+           
      -  bean:
          ref: headerConfigurer
-         method: "doSome(${header.jsonStr})"
+         method: "doSome(${body})"
             
      -  setBody: 
           simple: "SELECT '${header.randomUUID}' as ETL_ID, RQST AS rst,RESP  AS rsp,AGE AS ag,'${header.jsonStr}' as  BBBB  FROM TEST " 
@@ -41,10 +46,10 @@
     from:
       uri: 'direct:endpoint2'
     steps:
-      - setBody:
-          simple: hiii
-      - to:
-         uri: "{{url}}?maxTotalConnections=100&httpMethod=POST"   
+   #   - setBody:
+   #       simple: hiii
+   #   - to:
+   #      uri: "{{url}}?maxTotalConnections=100&httpMethod=POST"   
        
       -  unmarshal:
            json: {}
