@@ -5,22 +5,22 @@
       uri: "timer:httpTieragree?repeatCount=1"
     steps:
       - to: "freemarker:query.ftl"
-      - aggregate:   
-         correlationExpression: 
-           constant: "hopex"
+#      - aggregate:   
+#         correlationExpression: 
+#           constant: "hopex"
            
-         aggregationStrategy:   "#bean:arrayListAggregationStrategy"
-         completionSize: 2
+#         aggregationStrategy:   "#bean:arrayListAggregationStrategy"
+#         completionSize: 2
       
       -  setBody: 
           simple: "NAGGGGGGGGGGGG" 
       -  to: "file:{{destinationPath}}?fileName=output-${date:now:yyyyMMddHHmmssSSS}.json"
-      - aggregate:   
-         correlationExpression: 
-           constant: "hopex"
+ #     - aggregate:   
+ #        correlationExpression: 
+ #          constant: "hopex"
            
-         aggregationStrategy:   "#bean:arrayListAggregationStrategy"
-         completionSize: 2
+ #        aggregationStrategy:   "#bean:arrayListAggregationStrategy"
+ #        completionSize: 2
            
       - log: "aggreagted ${body}"
       - to: "freemarker:query.ftl"

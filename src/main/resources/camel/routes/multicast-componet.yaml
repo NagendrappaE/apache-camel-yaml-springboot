@@ -14,10 +14,26 @@
     from:
       uri: 'direct:endpoint1'
     steps:
-      - setBody:
-          simple: bye
-    #  - log: 'muuuu ${body}'
-      - to : 'direct:aggregate'
+     -  setHeader:
+          name: randomUUID
+          simple: "${uuid(simple}"
+     -  setHeader:
+          name: jsonStr
+          simple: "{{jsonpath.sample.req}}"   
+     -  bean:
+         ref: headerConfigurer
+         method: "doSome(${header.jsonStr})"
+            
+     -  setBody: 
+          simple: "SELECT '${header.randomUUID}' as ETL_ID, RQST AS rst,RESP  AS rsp,AGE AS ag,'${header.jsonStr}' as  BBBB  FROM TEST " 
+    
+     -  to:
+         uri: "sql:"
+       
+         parameters:
+          useMessageBodyForSql: true
+          outputType: StreamList     
+     - to : 'direct:aggregate'
 
       
 - route:
@@ -27,6 +43,16 @@
     steps:
       - setBody:
           simple: hiii
+      - to:
+         uri: "{{url}}?maxTotalConnections=100&httpMethod=POST"   
+       
+      -  unmarshal:
+           json: {}
+      - set-body:
+          simple: "${body[data]}" 
+      - set-body:
+          simple: "${body[organizationalProcess]}"       
+          
     #  - log: 'muuuu ${body}'
       - to : 'direct:aggregate'
  
@@ -37,3 +63,6 @@
     steps:
       
       - log: 'loggedddddd ${body}'
+      - process: 
+          ref: snowFlakeProcessor
+      
