@@ -9,9 +9,15 @@
      -  setHeader:
           name: randomUUID
           simple: "${uuid(simple}"
-          
+     -  setHeader:
+          name: jsonStr
+          simple: "{{jsonpath.sample.req}}"   
+     -  bean:
+         ref: headerConfigurer
+         method: "doSome(${header.jsonStr})"
+            
      -  setBody: 
-          simple: "SELECT '${header.randomUUID}' as ETL_ID, RQST AS rst,RESP  AS rsp,AGE AS ag FROM test" 
+          simple: "SELECT '${header.randomUUID}' as ETL_ID, RQST AS rst,RESP  AS rsp,AGE AS ag,'${header.jsonStr}' as  BBBB  FROM test" 
     
      -  to:
          uri: "sql:"
@@ -20,8 +26,11 @@
           useMessageBodyForSql: true
           outputType: StreamList
      -  log: "streamed ${body}"  
+   
      
      -  process: 
          ref: snowFlakeProcessor   
-           
+       
+       
+        
                 

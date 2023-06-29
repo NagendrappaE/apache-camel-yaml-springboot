@@ -72,5 +72,18 @@ public class HeaderConfigurer {
 		}
 
 	}
+	
+	public String doSome(String data) {
+		
+		
+		String replacedStr=data.replaceAll("'", "''");
+		
+		System.out.println("replaceddd"+replacedStr);
+		
+		
+		return replacedStr;
+		
+		
+	}
 
 }
