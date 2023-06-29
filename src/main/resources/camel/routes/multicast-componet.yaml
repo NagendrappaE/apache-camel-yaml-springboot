@@ -1,0 +1,39 @@
+- route:
+    id: uyuuyu
+    from:
+      uri: 'timer:startmulti?repeatCount=1'
+    steps:
+      - multicast:
+          parallelProcessing: true
+          aggregationStrategy: '#bean:arrayListAggregationStrategy'
+          steps:
+            - to: 'direct:endpoint1'
+            - to: 'direct:endpoint2'
+- route:
+    id: direct1
+    from:
+      uri: 'direct:endpoint1'
+    steps:
+      - setBody:
+          simple: bye
+    #  - log: 'muuuu ${body}'
+      - to : 'direct:aggregate'
+
+      
+- route:
+    id: direct2
+    from:
+      uri: 'direct:endpoint2'
+    steps:
+      - setBody:
+          simple: hiii
+    #  - log: 'muuuu ${body}'
+      - to : 'direct:aggregate'
+ 
+- route:
+    id: direct3
+    from:
+      uri: 'direct:aggregate'
+    steps:
+      
+      - log: 'loggedddddd ${body}'

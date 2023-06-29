@@ -5,6 +5,7 @@
      parameters:
         fixedRate: true
         period: 10000
+        repeatCount: 1
      steps: 
      -  setBody: 
           simple: "{\"data\":{\"organizationalProcess\":[{\"id\":\"Sibhhhhh\",\"name\":\"[Duplicated - CHARVE] Organization processs\",\"organizationalProcess_OwnerOrganizationalProcess\":[{\"id\":\"p(xyxyyx\",\"name\":\"notification of municiplabond default Distributions\"}]},{\"id\":\"NRPu1hhhhhhhh\",\"name\":\"Adding CUIPS Manually\",\"organizationalProcess_OwnerOrganizationalProcess\":[]}]}}" 

@@ -5,6 +5,7 @@
      parameters:
         fixedRate: true
         period: 10000
+        repeatCount: 1
      steps: 
      -  setHeader:
           name: randomUUID
@@ -17,7 +18,7 @@
          method: "doSome(${header.jsonStr})"
             
      -  setBody: 
-          simple: "SELECT '${header.randomUUID}' as ETL_ID, RQST AS rst,RESP  AS rsp,AGE AS ag,'${header.jsonStr}' as  BBBB  FROM test" 
+          simple: "SELECT '${header.randomUUID}' as ETL_ID, RQST AS rst,RESP  AS rsp,AGE AS ag,'${header.jsonStr}' as  BBBB  FROM TEST " 
     
      -  to:
          uri: "sql:"

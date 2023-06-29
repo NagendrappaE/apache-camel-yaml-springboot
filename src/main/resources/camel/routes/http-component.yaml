@@ -2,7 +2,7 @@
     id: "foo-one"
     autoStartup: true
     from:
-      uri: "timer:httpTimer"
+      uri: "timer:httpTimer?repeatCount=1"
     steps:
       - to: "bean:studentService?method=hello"
       - log: "${body}"
