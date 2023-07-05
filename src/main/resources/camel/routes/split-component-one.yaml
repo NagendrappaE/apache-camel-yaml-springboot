@@ -1,0 +1,20 @@
+- route:
+    id: "route-split-three"
+    from:
+     uri: "timer:splitmulti?repeatCount=1"
+   
+    steps:
+       - setBody: 
+          simple:
+           constant: "iamm|xyz"
+       - log: "the received body :::: ${body}"
+       
+       - split:
+          tokenize:
+           token: "\\|"
+            
+ 
+       - log: "the boody ${body}"       
+          
+       - to: "file:{{destinationPath}}?fileName=copy-of-${file:name}&doneFileName=${file:name.noext}.done"
+    
