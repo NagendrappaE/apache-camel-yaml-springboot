@@ -19,7 +19,7 @@
        
        - setHeader:
           name: "TableNameAr"
-          simple: "{{tableName}}"
+          simple: "{{tableNameList}}"
           
        - setHeader:
           name: "tableName"
