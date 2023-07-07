@@ -6,7 +6,7 @@
     steps:
        - setBody: 
           simple:
-           constant: "iamm|xyz"
+           constant: "NAGENDRA|RAVI"
        - log: "the received body :::: ${body}"
        
        - split:
@@ -14,7 +14,34 @@
            token: "\\|"
             
  
-       - log: "the boody ${body}"       
+       - log: "the boody ${body} ${headers}"  
+       - log: "the exchnage  ${exchangeProperty.CamelSplitIndex}"  
+       
+       - setHeader:
+          name: "TableNameAr"
+          simple: "{{tableName}}"
           
-       - to: "file:{{destinationPath}}?fileName=copy-of-${file:name}&doneFileName=${file:name.noext}.done"
-    
+       - setHeader:
+          name: "tableName"
+          simple: "${header.TableNameAr.split(',')[${exchangeProperty.CamelSplitIndex}]}"
+      
+       - log: "the table name ${header.tableName}"      
+            
+          
+       -  setBody: 
+           simple: "SELECT '${header.randomUUID}' as ETL_ID, RQST AS rst,RESP  AS rsp,AGE AS ag,'${body}' as  BBBB  FROM TEST "
+           
+       - to:
+          uri: "sql:"
+          
+          parameters:
+           useMessageBodyForSql: true
+           outputType: StreamList
+           
+       - log: "streamed ${body}" 
+       
+       -  process: 
+           ref: snowFlakeProcessor      
+                
+           
+              
