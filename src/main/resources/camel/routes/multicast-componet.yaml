@@ -3,6 +3,9 @@
     from:
       uri: 'timer:startmulti?repeatCount=1'
     steps:
+      - setHeader:
+          name: "x-hopex-session-token"
+          constant: "123333" 
       - to: "{{url}}?maxTotalConnections=100&httpMethod=POST"
     
       - multicast:

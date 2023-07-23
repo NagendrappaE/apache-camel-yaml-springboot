@@ -2,7 +2,7 @@
     id: "foo-one"
     autoStartup: true
     from:
-      uri: "timer:httpTimer?repeatCount=1"
+      uri: "timer:httpTimer?repeatCount=2"
     steps:
       - to: "bean:studentService?method=hello"
       - log: "${body}"
@@ -10,7 +10,17 @@
       - log: "${body}"
       - log: "the bank name {{bank.code}}"
       - to:
+          uri: "{{url2}}?maxTotalConnections=100&httpMethod=POST"
+      - log: "HTTP Headers ${headers}"  
+      - log: "X- token ${header.x-hopex-session-token}" 
+      - log: "X- token BODy ${header.x-hopex-session-token}" 
+      - setHeader:
+          name: "x-hopex-session-token"
+          simple: "${header.x-hopex-session-token}" 
+      - to:
           uri: "{{url}}?maxTotalConnections=100&httpMethod=POST"
+  
+          
       -  unmarshal:
            json: {}
       - set-body:

@@ -2,11 +2,16 @@ package com.ece.camel.yaml.spring.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.http.HttpStatus;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +26,8 @@ import com.ece.camel.yaml.spring.bean.StudentResp;
 @RequestMapping
 @RestController
 public class StudentController {
+	
+	HashMap<String, String> hashMap=new HashMap<>();
 
 	@PostMapping("savestudent")
 	public StudentResp getStudent(HttpServletRequest request, HttpServletResponse response) {
@@ -28,18 +35,31 @@ public class StudentController {
 		System.out.println("the IP address " + request.getRemoteAddr());
 
 		StudentResp resp = new StudentResp();
-
+		request.getHeaderNames();
 		resp.setSage(String.valueOf(LocalDate.now()));
 		resp.setSalary("500000");
 		resp.setSname("NAGENDRA");
+		String token=UUID.randomUUID().toString();
+		response.setHeader("x-hopex-session-token",token);
+		hashMap.put(token, token);
+		response.setStatus(HttpStatus.SC_PARTIAL_CONTENT);
 		return resp;
 
 	}
 
 	@PostMapping("getapex")
-	public Root getApexRespo(HttpServletRequest request, HttpServletResponse response) {
+	public Root getApexRespo(HttpServletRequest request, HttpServletResponse response,@RequestHeader("x-hopex-session-token") String token) {
 
 		System.out.println("the IP address " + request.getRemoteAddr());
+		request.getHeaderNames();
+		
+		
+		System.out.println("REC X-"+token);
+		
+		if(!hashMap.containsKey(token)) {
+			response.setStatus(HttpStatus.SC_UNAUTHORIZED);
+			return null;
+		}
 
 		ArrayList<Datum> dataList = new ArrayList<>();
 		Datum daa = new Datum();
@@ -81,6 +101,7 @@ public class StudentController {
 		
 		data.setOrganizationalProcess(organizationalProcessList);
 		root.setData(data);
+		
 
 		return root;
 
