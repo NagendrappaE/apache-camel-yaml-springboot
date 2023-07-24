@@ -1,0 +1,26 @@
+- route:
+    id: "choice-one"
+    autoStartup: true
+    from:
+      uri: "timer:httpTimer?repeatCount=2"
+    steps:
+      - choice:
+          # Check if the header "status" is equal to "success"
+            when:
+            -  simple: "${header.status} == 'success'"
+               steps:
+               - log: "Processing successful message"
+               - to: "mock:success"  # Route to this endpoint if the status is "success"
+
+          # Check if the header "status" is equal to "error"
+            when:
+             - simple: "${header.status} == 'error'"
+               steps:
+               - log: "Processing error message"
+               - to: "mock:error"  # Route to this endpoint if the status is "error"
+
+          # Add an optional "otherwise" block for handling any other status value
+            otherwise: 
+              steps:
+                - log: "Processing other message"
+                - to: "mock:other"  # Route to this endpoint for any other status value
