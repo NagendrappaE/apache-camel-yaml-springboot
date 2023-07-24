@@ -1,0 +1,18 @@
+-  route:
+     id: "sql-route-velocity-one"
+     from:
+      uri: "timer:sqlTimer"
+      parameters:
+        fixedRate: true
+        period: 10000
+      steps:
+      - setBody: 
+          simple:
+           constant: "iamm"
+      - log: "${body}"   
+      - to: "sql:SELECT  * FROM test"
+      - log: "SQL HEADERS ${headers}"
+      - log: "exhange properties ${exchange.properties}"
+      - log: "BODY ${body[0]}"
+      - to: "velocity:classpath:templates/sqlQuery.vm?contentCache=true"
+      - log: "template oupput ${body}"

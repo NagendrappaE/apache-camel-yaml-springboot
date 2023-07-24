@@ -71,11 +71,14 @@
 			<version>${camel.version}</version>
 		</dependency>
 
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-jsonpath-starter</artifactId>
+			<artifactId>camel-velocity-starter</artifactId>
 			<version>${camel.version}</version>
-		</dependency> -->
+		</dependency>
+
+		<!-- <dependency> <groupId>org.apache.camel.springboot</groupId> <artifactId>camel-jsonpath-starter</artifactId> 
+			<version>${camel.version}</version> </dependency> -->
 
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
