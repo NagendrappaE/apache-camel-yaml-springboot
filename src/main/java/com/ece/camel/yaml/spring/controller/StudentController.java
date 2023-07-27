@@ -56,7 +56,7 @@ public class StudentController {
 		
 		System.out.println("REC X-"+token);
 		
-		if(!hashMap.containsKey(token)) {
+		if(token.contains("y")) {
 			response.setStatus(HttpStatus.SC_UNAUTHORIZED);
 			return null;
 		}

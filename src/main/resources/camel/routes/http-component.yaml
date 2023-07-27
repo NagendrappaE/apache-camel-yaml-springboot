@@ -17,20 +17,18 @@
       - setHeader:
           name: "x-hopex-session-token"
           simple: "${header.x-hopex-session-token}" 
-   #   - to:
-   #       uri: "{{url}}?maxTotalConnections=100&httpMethod=POST"
       - log: "HTTP STATUS ${header.CamelHttpResponseCode}"    
      
       - loop:
            doWhile: true
            expression:
-             simple: "${header.CamelHttpResponseCode} != 200"
+             simple: "${header.CamelHttpResponseCode} == 206"
             
           
            
           
            steps:
-            - log: "Executing the loop step" 
+            - log: "Executing the loop step    ${header.CamelHttpResponseCode}" 
             - to:
                 uri: "{{url}}?maxTotalConnections=100&httpMethod=POST" 
            

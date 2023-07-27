@@ -10,7 +10,16 @@
           simple:
            constant: "iamm"
       - log: "${body}"   
-      - to: "sql:SELECT  * FROM test"
+      - to: "sql:SELECT  * FROM ORG_CONFIG"
+      
+      - split:
+           simple: "${body}"
+ 
+      - log: "template oupput ${body}"
+      
+      - log: "the value URL ${body['URL']}"
+      - log: "the value REQ ${body['REQBODY']}"
+      - log: "the value  TAB ${body['SOURCE_TABLE_NM']}"
       - log: "SQL HEADERS ${headers}"
       - log: "exhange properties ${exchange.properties}"
       - log: "BODY ${body[0]}"
