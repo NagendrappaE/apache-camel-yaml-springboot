@@ -1,0 +1,31 @@
+- route:
+    id: "velocity-json-one"
+    autoStartup: true
+    from:
+      uri: "timer:httpTimer?repeatCount=2"
+    steps:
+      - to: "velocity:classpath:templates/config.json?contentCache=true"
+      -  unmarshal:
+           json: {}
+      -  log: "JSON LIST ${body}"    
+      - split:
+           simple: "${body}"
+           steps:
+           - log: "the value URL ${body['URL']}"
+           - log: "the value REQ ${body['REQBODY']}"
+           - log: "the value  TAB ${body['SOURCE_TABLE_NM']}"
+           
+           - setHeader:
+              name: URL
+              simple: "${body['URL']}"
+             
+           - setBody:
+              simple: "${body['REQBODY']}"
+           - convertBodyTo: String   
+           - log: "REQ BODY ${body}"   
+           - toD: 
+               uri: "${header.URL}"
+           - log: "THE API RESPONSE ${body}"
+           
+           
+           

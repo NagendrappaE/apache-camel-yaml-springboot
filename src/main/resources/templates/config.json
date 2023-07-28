@@ -1,0 +1,21 @@
+[
+  {
+    "URL": "http://localhost:8080/savestudent1",
+    "REQBODY": {
+      "reqParam1": "1234",
+      "reqParam2": "256210",
+      "reqType": "IB",
+      "mandateRefNumber": "FDRL843vly"
+    },
+    "PARAMETERS": "",
+    "SOURCE_TABLE_NM": "TA_TABLE1"
+  },
+  {
+    "URL": "http://localhost:8080/savestudent2",
+    "REQBODY": {
+      "query": "{organization{id name process{id name}}}"
+    },
+    "PARAMETERS": "",
+    "SOURCE_TABLE_NM": "TA_TABLE2"
+  }
+]

@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.HttpStatus;
-import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -104,6 +104,45 @@ public class StudentController {
 		
 
 		return root;
+
+	}
+	
+	@PostMapping("savestudent1")
+	public StudentResp getStudent1(HttpServletRequest request, HttpServletResponse response,@RequestBody String req) {
+
+		System.out.println("the IP address " + request.getRemoteAddr());
+		System.out.println("Received REQUEST" + req);
+
+		StudentResp resp = new StudentResp();
+		request.getHeaderNames();
+		resp.setSage(String.valueOf(LocalDate.now()));
+		resp.setSalary("500000");
+		resp.setSname("NAGENDRA");
+		String token=UUID.randomUUID().toString();
+		response.setHeader("x-hopex-session-token",token);
+		hashMap.put(token, token);
+		response.setStatus(HttpStatus.SC_OK);
+		return resp;
+
+	}
+	@PostMapping("savestudent2")
+	public StudentResp getStudent2(HttpServletRequest request, HttpServletResponse response,@RequestBody String req) {
+
+		System.out.println("the IP address " + request.getRemoteAddr());
+		
+		System.out.println(" Received REQUEST" + req);
+
+
+		StudentResp resp = new StudentResp();
+		request.getHeaderNames();
+		resp.setSage(String.valueOf(LocalDate.now()));
+		resp.setSalary("500000");
+		resp.setSname("NAGENDRA");
+		String token=UUID.randomUUID().toString();
+		response.setHeader("x-hopex-session-token",token);
+		hashMap.put(token, token);
+		response.setStatus(HttpStatus.SC_OK);
+		return resp;
 
 	}
 
