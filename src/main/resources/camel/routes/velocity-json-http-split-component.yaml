@@ -16,15 +16,19 @@
            - log: "the value  TAB ${body['SOURCE_TABLE_NM']}"
            
            - setHeader:
-              name: URL
+              name: ENDPOINT
               simple: "${body['URL']}"
+              
              
            - setBody:
               simple: "${body['REQBODY']}"
-           - convertBodyTo: String   
+        #   - convertBodyTo: String   
            - log: "REQ BODY ${body}"   
+           -  marshal:
+               json: {}
+           - log: "REQ BODY STRING  ${body}"   
            - toD: 
-               uri: "${header.URL}"
+               uri: "${header.ENDPOINT}"
            - log: "THE API RESPONSE ${body}"
            
            
