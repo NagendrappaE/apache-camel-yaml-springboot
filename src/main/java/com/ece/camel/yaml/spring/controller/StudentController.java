@@ -145,5 +145,62 @@ public class StudentController {
 		return resp;
 
 	}
+	
+	@PostMapping("getapextoken")
+	public Root getApexRespoWithOutToken(HttpServletRequest request, HttpServletResponse response,@RequestHeader("x-hopex-session-token") String token) {
+
+		System.out.println("the IP address " + request.getRemoteAddr());
+		request.getHeaderNames();
+		
+		
+		System.out.println("REC X-"+token);
+		
+		
+
+		ArrayList<Datum> dataList = new ArrayList<>();
+		Datum daa = new Datum();
+
+		Root root = new Root();
+
+		ArrayList<OrganizationalProcessOwnerOrganizationalProcess> organizationalProcess_OwnerOrganizationalProces = new ArrayList<>();
+
+		OrganizationalProcessOwnerOrganizationalProcess proce = new OrganizationalProcessOwnerOrganizationalProcess();
+
+		proce.setId("XXXX{][]ss");
+		proce.setName("udud907082072eef33'..']p/./../.");
+
+		organizationalProcess_OwnerOrganizationalProces.add(proce);
+
+		daa.setId("Sibhhhhh");
+		daa.setName("[Duplicated - CHARVE] Organization processs");
+		daa.setOrganizationalProcess_OwnerOrganizationalProcess(organizationalProcess_OwnerOrganizationalProces);
+
+		for (int i = 0; i < 2; i++) {
+			dataList.add(daa);
+		}
+
+		HopexResponse resp = new HopexResponse();
+		resp.setData(dataList);
+
+		Data data = new Data();
+
+		ArrayList<OrganizationalProcess> organizationalProcessList = new ArrayList<>();
+		OrganizationalProcess organizationalProcess = new OrganizationalProcess();
+		organizationalProcess.setId("Sibhhhhh");
+		organizationalProcess.setName("[Duplicated - CHARVE] Organization processs");
+		organizationalProcess
+				.setOrganizationalProcess_OwnerOrganizationalProcess(organizationalProcess_OwnerOrganizationalProces);
+
+		for (int i = 0; i < 2; i++) {
+			organizationalProcessList.add(organizationalProcess);
+		}
+		
+		data.setOrganizationalProcess(organizationalProcessList);
+		root.setData(data);
+		
+
+		return root;
+
+	}
 
 }

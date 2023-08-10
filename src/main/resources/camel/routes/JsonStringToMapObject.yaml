@@ -7,11 +7,16 @@
       - setHeader:
           name: "ref" 
           constant: "12222222222"
-          
+      - setHeader:
+          name: "x-hopex-session-token"
+          simple: "122121"     
+      - to:
+          uri: "http://localhost:8080/getapextoken?maxTotalConnections=100&httpMethod=POST"
+      - log: " API BODY the request json ${body}"                
       - setHeader:
           name: "jsonHeader" 
           expression: 
-             simple: "[{\"key\": \"${header.ref}\"}]"  
+             simple: "[{\"ETL_ID\": \"${header.ref}\",\"CONETNT\": ${body} }]"  
           
       - setBody:
             simple: "${header.jsonHeader}"
