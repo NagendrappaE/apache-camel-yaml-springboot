@@ -1,0 +1,31 @@
+- route:
+    id: "jsonmap-object"
+    autoStartup: true
+    from:
+      uri: "timer:jsonStringMap?repeatCount=1"
+    steps:
+      - setHeader:
+          name: "ref" 
+          constant: "12222222222"
+          
+      - setHeader:
+          name: "jsonHeader" 
+          expression: 
+             simple: "[{\"key\": \"${header.ref}\"}]"  
+          
+      - setBody:
+            simple: "${header.jsonHeader}"
+            
+      - log: " PRE the request json ${body}"          
+            
+      -  unmarshal:
+           json: {}
+          #  unmarshalType: java.util.List
+                   
+      - log: " POST the request json ${body}"  
+      
+      - process: 
+          ref: snowFlakeProcessor        
+          
+        
+          

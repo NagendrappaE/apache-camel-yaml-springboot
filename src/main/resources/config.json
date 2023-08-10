@@ -13,7 +13,7 @@
   {
     "URL": "http://localhost:8080/savestudent2",
     "REQBODY": {
-      "query": {"query":"{organization{id name process{id name}}}"}
+      "query": "{organization{id name process{id name}}}"
     },
     "PARAMETERS": "",
     "SOURCE_TABLE_NM": "TA_TABLE2"

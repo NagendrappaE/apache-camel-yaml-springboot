@@ -8,8 +8,13 @@
         repeatCount: 1
      steps: 
      -  setBody: 
-          simple: "{\"data\":{\"organizationalProcess\":[{\"id\":\"Sibhhhhh\",\"name\":\"[Duplicated - CHARVE] Organization processs\",\"organizationalProcess_OwnerOrganizationalProcess\":[{\"id\":\"p(xyxyyx\",\"name\":\"notification of municiplabond default Distributions\"}]},{\"id\":\"NRPu1hhhhhhhh\",\"name\":\"Adding CUIPS Manually\",\"organizationalProcess_OwnerOrganizationalProcess\":[]}]}}" 
-     -  to: "file:{{destinationPath}}?fileName=output-${date:now:yyyyMMddHHmmssSSS}.json"
+          simple: "{\"data\":{\"organizationalProcess\":[{\"id\":\"\\uibhhhhh\",\"name\":\"[Duplicated - CHARVE] Organization processs\",\"organizationalProcess_OwnerOrganizationalProcess\":[{\"id\":\"p(xyxyyx\",\"name\":\"notification of municiplabond default Distributions\"}]},{\"id\":\"NRPu1hhhhhhhh\",\"name\":\"Adding CUIPS Manually\",\"organizationalProcess_OwnerOrganizationalProcess\":[]}]}}" 
+     
+     - transform:
+          simple: ${bodyAs(String).replaceAll('NAA','U')} 
+          
+          
+     -  to: "file:{{destinationPath}}?fileName=outputnagendra-${date:now:yyyyMMddHHmmssSSS}.json"
      - log: "the header ${headers}"
      -  bean:
          ref: headerConfigurer

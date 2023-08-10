@@ -24,7 +24,7 @@ public class SnowFlakeProcessor implements Processor {
 	public void process(Exchange exchange) throws Exception {
 
 		try {
-			System.err.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+			System.err.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"+exchange.getIn().getBody(String.class));
 
 			Iterator<Message> exchangelist = exchange.getIn().getBody(Iterator.class);
 

@@ -23,6 +23,8 @@ import com.jayway.jsonpath.Option;
 @Component
 public class HeaderConfigurer {
 
+	String req="[{\"URL\":\"http://localhost:8080/savestudent1\",\"REQBODY\":{\"URL\":\"3335101002388\",\"REQUESTBODY\":\"validateOTP\",\"reqParam1\":\"1234\",\"reqParam2\":\"256210\",\"reqType\":\"IB\",\"mandateRefNumber\":\"FDRL843vly\"},\"PARAMETERS\":\"\",\"SOURCE_TABLE_NM\":\"TA_TABLE1\"},{\"URL\":\"http://localhost:8080/savestudent2\",\"REQBODY\":{\"query\":\"{organization{id name process{id name}}}\"},\"PARAMETERS\":\"\",\"SOURCE_TABLE_NM\":\"TA_TABLE2\"}]";
+	
 	private final String CONFIG_TYPE_HEADER = "header";
 
 	private final String CONFIG_TYPE_BODY = "body";
@@ -58,7 +60,7 @@ public class HeaderConfigurer {
 
 			}
 
-			Object lookupJsonData = documentContext.read("$" + match);
+			Object lookupJsonData = documentContext.read("$." + match);
 
 			if (lookupJsonData != null && configType.equals(CONFIG_TYPE_HEADER)) {
 				exchange.getIn().setHeader(configLocation, lookupJsonData);
