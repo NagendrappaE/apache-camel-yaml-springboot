@@ -1,0 +1,17 @@
+- route:
+    id: "velocity-timer-1"
+    autoStartup: true
+    from:
+      uri: "timer:velocitytimerone?repeatCount=1"
+    steps:
+      - setHeader:
+          name: fruit
+          constant: "apple"   
+      - setHeader:
+          name: selectsql
+          constant: "SELECT  * FROM TEST"    
+      - setHeader:
+          name: tableName
+          constant: "TEST_MASTER"    
+      - to: "velocity:classpath:templates/SampleMarco.vm?contentCache=true"
+      - log: "MACRO>>>>>> ${body}" 

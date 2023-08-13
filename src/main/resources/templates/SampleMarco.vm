@@ -1,0 +1,65 @@
+#macro( d ) <tr><td></td></tr> #end
+#d()
+
+#set( $a = "Velocity" )
+<html><body>
+hello  $a
+</body></html>
+
+#set($name = 10)
+
+
+#foreach($i in [0..10])
+
+counter is :::: $i
+
+#end
+
+#if($headers.fruit == "apple")
+
+this is an applie
+#set ($selectedFruit="NAGDDD")
+
+#else 
+this is not apple
+
+#end
+
+the selected from if condition is $selectedFruit
+
+the selected  fruite   #set( $fruit = $selectedFruit )
+
+FINAL OUTPUT is $fruit
+
+
+
+## list example
+
+#set( $fruites = ["apple","mango","orange","xxx"])
+
+#foreach( $f in $fruites)
+
+THE FRUITE NAME id $f
+
+#end
+
+
+#if($headers.selectsql != '' &&  $headers.tableName == "TEST_MASTER")
+
+insert into table $headers.tableName as $headers.selectsql
+
+#end
+
+#macro (callme $a)
+hello $a $a $a
+#end
+
+#callme("NNNNN")
+
+
+
+
+
+
+
+
