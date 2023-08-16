@@ -28,9 +28,11 @@
           outputType: StreamList
      -  log: "streamed ${body}"  
    
-     
-     -  process: 
-         ref: snowFlakeProcessor   
+     -  log: "streamed  XXXXXX ${body}"  
+   
+     -  to: "bean:beanExchangeService?method=setobject" 
+#     -  process: 
+#         ref: snowFlakeProcessor   
        
        
         

@@ -5,7 +5,7 @@ package com.ece.camel.yaml.spring.configurer;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -93,7 +93,7 @@ public class HeaderConfigurer {
 			String connetnt) {
 
 		List<Map<String, Object>> list = new ArrayList<>();
-		Map<String, Object> hm = new HashMap<String, Object>();
+		Map<String, Object> hm = new LinkedHashMap<String, Object>();
 
 		hm.put("ETL_ID", etlid);
 		hm.put("ETL_TS", etldts);

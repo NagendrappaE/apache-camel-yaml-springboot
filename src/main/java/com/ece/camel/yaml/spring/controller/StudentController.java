@@ -171,7 +171,7 @@ public class StudentController {
 		daa.setName("[Duplicated - CHARVE] Organization processs");
 		daa.setOrganizationalProcess_OwnerOrganizationalProcess(organizationalProcess_OwnerOrganizationalProces);
 
-		for (int i = 0; i < 20000; i++) {
+		for (int i = 0; i < 2; i++) {
 			dataList.add(daa);
 		}
 
@@ -187,7 +187,7 @@ public class StudentController {
 		organizationalProcess
 				.setOrganizationalProcess_OwnerOrganizationalProcess(organizationalProcess_OwnerOrganizationalProces);
 
-		for (int i = 0; i < 200; i++) {
+		for (int i = 0; i < 2; i++) {
 			organizationalProcessList.add(organizationalProcess);
 		}
 		
