@@ -1,0 +1,15 @@
+- route:
+    id: "http-jsonmap-object"
+    autoStartup: true
+    from:
+      uri: "timer:http-jsonmap-stringconverter-timer?repeatCount=1"
+    steps:
+        
+      - to:
+          uri: "http://localhost:8080/getapextoken?maxTotalConnections=100&httpMethod=POST"
+      - log: " API BODY the request json ${body}" 
+      
+      - bean:
+          ref: headerConfigurer
+          method: "listOfMapFromJsonString('etdl123333','etdl_dt_time','metadata',${body})"
+      - log: "the  final object ${body}" 

@@ -147,13 +147,9 @@ public class StudentController {
 	}
 	
 	@PostMapping("getapextoken")
-	public Root getApexRespoWithOutToken(HttpServletRequest request, HttpServletResponse response,@RequestHeader("x-hopex-session-token") String token) {
+	public Root getApexRespoWithOutToken(HttpServletRequest request, HttpServletResponse response) {
 
-		System.out.println("the IP address " + request.getRemoteAddr());
-		request.getHeaderNames();
 		
-		
-		System.out.println("REC X-"+token);
 		
 		
 
@@ -175,7 +171,7 @@ public class StudentController {
 		daa.setName("[Duplicated - CHARVE] Organization processs");
 		daa.setOrganizationalProcess_OwnerOrganizationalProcess(organizationalProcess_OwnerOrganizationalProces);
 
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 20000; i++) {
 			dataList.add(daa);
 		}
 
@@ -191,7 +187,7 @@ public class StudentController {
 		organizationalProcess
 				.setOrganizationalProcess_OwnerOrganizationalProcess(organizationalProcess_OwnerOrganizationalProces);
 
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 200; i++) {
 			organizationalProcessList.add(organizationalProcess);
 		}
 		

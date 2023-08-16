@@ -4,6 +4,10 @@
 package com.ece.camel.yaml.spring.configurer;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.camel.Exchange;
 import org.springframework.stereotype.Component;
@@ -23,8 +27,8 @@ import com.jayway.jsonpath.Option;
 @Component
 public class HeaderConfigurer {
 
-	String req="[{\"URL\":\"http://localhost:8080/savestudent1\",\"REQBODY\":{\"URL\":\"3335101002388\",\"REQUESTBODY\":\"validateOTP\",\"reqParam1\":\"1234\",\"reqParam2\":\"256210\",\"reqType\":\"IB\",\"mandateRefNumber\":\"FDRL843vly\"},\"PARAMETERS\":\"\",\"SOURCE_TABLE_NM\":\"TA_TABLE1\"},{\"URL\":\"http://localhost:8080/savestudent2\",\"REQBODY\":{\"query\":\"{organization{id name process{id name}}}\"},\"PARAMETERS\":\"\",\"SOURCE_TABLE_NM\":\"TA_TABLE2\"}]";
-	
+	String req = "[{\"URL\":\"http://localhost:8080/savestudent1\",\"REQBODY\":{\"URL\":\"3335101002388\",\"REQUESTBODY\":\"validateOTP\",\"reqParam1\":\"1234\",\"reqParam2\":\"256210\",\"reqType\":\"IB\",\"mandateRefNumber\":\"FDRL843vly\"},\"PARAMETERS\":\"\",\"SOURCE_TABLE_NM\":\"TA_TABLE1\"},{\"URL\":\"http://localhost:8080/savestudent2\",\"REQBODY\":{\"query\":\"{organization{id name process{id name}}}\"},\"PARAMETERS\":\"\",\"SOURCE_TABLE_NM\":\"TA_TABLE2\"}]";
+
 	private final String CONFIG_TYPE_HEADER = "header";
 
 	private final String CONFIG_TYPE_BODY = "body";
@@ -37,8 +41,8 @@ public class HeaderConfigurer {
 
 	public void process(String fileName, String match, String configType, String configLocation, Exchange exchange) {
 
-		System.out.println("hiii"+fileName);
-		
+		System.out.println("hiii" + fileName);
+
 		if (StringUtils.hasText(fileName)) {
 
 			try {
@@ -74,18 +78,32 @@ public class HeaderConfigurer {
 		}
 
 	}
-	
+
 	public String doSome(String data) {
-		
-		
-		String replacedStr=data.replaceAll("'", "''");
-		
-		System.out.println("replaceddd"+replacedStr);
-		
-		
+
+		String replacedStr = data.replaceAll("'", "''");
+
+		System.out.println("replaceddd" + replacedStr);
+
 		return replacedStr;
+
+	}
+
+	public List<Map<String, Object>> listOfMapFromJsonString(String etlid, String etldts, String metadata,
+			String connetnt) {
+
+		List<Map<String, Object>> list = new ArrayList<>();
+		Map<String, Object> hm = new HashMap<String, Object>();
+
+		hm.put("ETL_ID", etlid);
+		hm.put("ETL_TS", etldts);
+		hm.put("METADATA", metadata);
+		hm.put("CONTENT", connetnt);
+		list.add(hm);
+
 		
-		
+		return list;
+
 	}
 
 }
