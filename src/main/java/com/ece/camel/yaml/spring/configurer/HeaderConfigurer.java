@@ -101,7 +101,16 @@ public class HeaderConfigurer {
 		hm.put("CONTENT", connetnt);
 		list.add(hm);
 
-		
+		return list;
+
+	}
+
+	public List<Map<String, Object>> GenericMap(Map<String, Object> data) {
+
+		List<Map<String, Object>> list = new ArrayList<>();
+
+		list.add(data);
+
 		return list;
 
 	}

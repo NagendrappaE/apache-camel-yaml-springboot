@@ -9,9 +9,27 @@
           uri: "http://localhost:8080/getapextoken?maxTotalConnections=100&httpMethod=POST"
       - log: " API BODY the request json ${body}" 
       
-      - bean:
+#      - bean:
+#          ref: headerConfigurer
+#          method: "listOfMapFromJsonString('etdl123333','etdl_dt_time','metadata',${body})"
+#      - log: "the  final object JSON :::; ${body}" 
+#      -  to: "bean:beanExchangeService?method=setobject" 
+      
+      - setHeader:
+          name: "jsonHeader" 
+          expression: 
+             simple: "{\"ETL_ID\": \"${header.ref}\",\"CONETNT\": ${body}, \"NAME\": \"NAGENND\" }"  
+          
+      - setBody:
+            simple: "${header.jsonHeader}"
+            
+      - unmarshal:
+           json: {}      
+            
+      -  bean:
           ref: headerConfigurer
-          method: "listOfMapFromJsonString('etdl123333','etdl_dt_time','metadata',${body})"
-      - log: "the  final object JSON :::; ${body}" 
-      -  to: "bean:beanExchangeService?method=setobject" 
+          method: "GenericMap(${body})"     
+      - log: "the  final object JSON MAP :::; ${body}" 
+      - to: "bean:beanExchangeService?method=setobject" 
+            
       
