@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
@@ -113,6 +116,23 @@ public class HeaderConfigurer {
 
 		return list;
 
+	}
+	
+	public String jsonStringSingleLine(Object inout) {
+		
+		ObjectMapper mapper=new ObjectMapper();
+		mapper.disable(SerializationFeature.INDENT_OUTPUT);
+
+		String singleLine=null;
+		
+		try {
+			 singleLine=mapper.writeValueAsString(inout);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return singleLine;
+		
 	}
 
 }

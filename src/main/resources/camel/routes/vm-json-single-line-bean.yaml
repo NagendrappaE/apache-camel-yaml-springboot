@@ -1,0 +1,12 @@
+- route:
+    id: "velocity-json-single-line-1"
+    autoStartup: true
+    from:
+      uri: "timer:velocity-json-single-line-1-timer?repeatCount=1"
+    steps:  
+      - to: "velocity:classpath:templates/jsonReqStr.vm?contentCache=true"
+      - log: "THE VELOCITY OUTPUT IS ${body}"
+      -  bean:
+          ref: headerConfigurer
+          method: "jsonStringSingleLine(${body})"     
+      - log: "THE VELOCITY OUTPUT IS SINGLE LINE :::; ${body}" 

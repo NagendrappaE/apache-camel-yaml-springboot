@@ -1,0 +1,29 @@
+{
+   "ETL_ID": "12222222222",           
+   "CONETNT": {
+      "data": {
+         "organizationalProcess": [
+            {
+               "id": "Sibhhhhh",
+               "name": "[Duplicated - CHARVE] Organization processs",
+               "organizationalProcess_OwnerOrganizationalProcess": [
+                  {
+                     "id": "XXXX{][]ss",
+                     "name": "udud907082072eef33'..']p/./../."
+                  }
+               ]
+            },
+            {
+               "id": "Sibhhhhh",      
+               "name": "[Duplicated - CHARVE] Organization processs",    
+               "organizationalProcess_OwnerOrganizationalProcess": [
+                  {
+                     "id": "XXXX{][]ss",
+                     "name": "udud907082072eef33'..']p/./../."      
+                  }
+               ]
+            }
+         ]
+      }
+   }
+}
