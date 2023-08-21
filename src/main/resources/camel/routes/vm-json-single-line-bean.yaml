@@ -6,7 +6,11 @@
     steps:  
       - to: "velocity:classpath:templates/jsonReqStr.vm?contentCache=true"
       - log: "THE VELOCITY OUTPUT IS ${body}"
-      -  bean:
-          ref: headerConfigurer
-          method: "jsonStringSingleLine(${body})"     
-      - log: "THE VELOCITY OUTPUT IS SINGLE LINE :::; ${body}" 
+#      -  bean:
+#          ref: headerConfigurer
+#          method: "jsonStringSingleLine(${body})"
+
+      -  split:
+          streaming: true
+          jsonpath: "$..organizationalProcess[*]"      
+      -  log: "THE VELOCITY OUTPUT IS SINGLE LINE :::; ${body}" 
