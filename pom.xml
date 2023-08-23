@@ -19,6 +19,7 @@
 		<camel.version>3.20.6</camel.version>
 	</properties>
 	<dependencies>
+	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jdbc</artifactId>
