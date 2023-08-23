@@ -117,22 +117,47 @@ public class HeaderConfigurer {
 		return list;
 
 	}
-	
+
 	public String jsonStringSingleLine(Object inout) {
-		
-		ObjectMapper mapper=new ObjectMapper();
+
+		ObjectMapper mapper = new ObjectMapper();
 		mapper.disable(SerializationFeature.INDENT_OUTPUT);
 
-		String singleLine=null;
-		
+		String singleLine = null;
+
 		try {
-			 singleLine=mapper.writeValueAsString(inout);
+			singleLine = mapper.writeValueAsString(inout);
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return singleLine;
-		
+
+	}
+
+	public List<Map<String, Object>> genericMapData(Map<String, Object> data, String jsonStringKey) {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.disable(SerializationFeature.INDENT_OUTPUT);
+
+		List<Map<String, Object>> list = new ArrayList<>();
+
+		data.computeIfPresent(jsonStringKey, (key, value) -> {
+
+			String finalResp = null;
+			try {
+				finalResp = mapper.writeValueAsString(value);
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return finalResp;
+
+		});
+
+		list.add(data);
+
+		return list;
+
 	}
 
 }
