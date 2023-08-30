@@ -10,7 +10,25 @@
 #          ref: headerConfigurer
 #          method: "jsonStringSingleLine(${body})"
 
+       
+
       -  split:
           streaming: true
-          jsonpath: "$..organizationalProcess[*]"      
+          jsonpath: "$..organizationalProcess[*]"  
+      - marshal:
+          json: {}    
+      - setBody:
+         simple: "{\"ETL_ID\": \"${header.ref}\",\"CONETNT\": ${body}, \"NAME\": \"NAGENND\" }"
+      -  unmarshal:
+           json: {}   
+      - aggregate:   
+         correlationExpression: 
+            constant: "true"
+         aggregationStrategy:   "#bean:arrayListAggregationStrategy"  
+         completionSize: 2      
       -  log: "THE VELOCITY OUTPUT IS SINGLE LINE :::; ${body}" 
+      
+   
+           
+      - process: 
+          ref: snowFlakeProcessor     
