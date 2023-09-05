@@ -5,9 +5,13 @@ package com.ece.camel.yaml.spring.configurer;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import org.apache.camel.Exchange;
 import org.springframework.stereotype.Component;
@@ -155,6 +159,41 @@ public class HeaderConfigurer {
 		});
 
 		list.add(data);
+
+		return list;
+
+	}
+
+	public List<Map<String, Object>> listOfMap(LinkedList<Object> linkedlist, String etlid, String etldts,
+			String metadata, int batchSize) {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.disable(SerializationFeature.INDENT_OUTPUT);
+
+		List<Map<String, Object>> list = new ArrayList<>();
+
+		AtomicInteger counter = new AtomicInteger();
+
+		Collection<List<Object>> li = linkedlist.parallelStream().map(item -> item)
+				.collect(Collectors.groupingBy(x -> counter.getAndIncrement() / batchSize)).values();
+
+		for (List<Object> l : li) {
+			Map<String, Object> hm = new LinkedHashMap<String, Object>();
+
+			hm.put("ETL_ID", etlid);
+			hm.put("ETL_TS", etldts);
+			hm.put("METADATA", metadata);
+			try {
+				hm.put("CONTENT", mapper.writeValueAsString(l));
+
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			list.add(hm);
+
+		}
+		System.out.println("the data " + linkedlist);
+		System.out.println("the data " + li);
 
 		return list;
 

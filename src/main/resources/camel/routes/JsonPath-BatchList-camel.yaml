@@ -1,0 +1,23 @@
+- route:
+    id: "velocity-jsonPath-single-line-1"
+    autoStartup: true
+    from:
+      uri: "timer:velocity-json-single-line-1-timer?repeatCount=1"
+    steps:  
+      - to: "velocity:classpath:templates/jsonReqStr.vm?contentCache=true"
+      - log: "THE VELOCITY OUTPUT IS ${body}"
+
+
+       
+
+      -  setBody:
+          jsonpath: "$..organizationalProcess[*]"  
+          
+      -  bean:
+          ref: headerConfigurer
+          method: "listOfMap(${body},'ETLID','ETLTS','XYZ',3)"      
+          
+  
+      - log: "the final out ${body}"     
+      -  process: 
+          ref: snowFlakeProcessor 

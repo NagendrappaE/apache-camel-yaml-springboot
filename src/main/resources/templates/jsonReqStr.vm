@@ -1,29 +1,79 @@
 {
-   "ETL_ID": "12222222222",           
-   "CONETNT": {
-      "data": {
-         "organizationalProcess": [
+  "ETL_ID": "12222222222",
+  "CONETNT": {
+    "data": {
+      "organizationalProcess": [
+        {
+          "id": "RAVI",
+          "name": "[Duplicated - CHARVE] Organization processs",
+          "organizationalProcess_OwnerOrganizationalProcess": [
             {
-               "id": "RAVI",
-               "name": "[Duplicated - CHARVE] Organization processs",
-               "organizationalProcess_OwnerOrganizationalProcess": [
-                  {
-                     "id": "XXXX{][]ss",
-                     "name": "udud907082072eef33'..']p/./../."
-                  }
-               ]
-            },
-            {
-               "id": "NAGENDRA",      
-               "name": "[Duplicated - CHARVE] Organization processs",    
-               "organizationalProcess_OwnerOrganizationalProcess": [
-                  {
-                     "id": "XXXX{][]ss",
-                     "name": "udud907082072eef33'..']p/./../."      
-                  }
-               ]
+              "id": "XXXX{][]ss",
+              "name": "udud907082072eef33'..']p/./../."
             }
-         ]
-      }
-   }
+          ]
+        },
+        {
+          "id": "NAGENDRA",
+          "name": "[Duplicated - CHARVE] Organization processs",
+          "organizationalProcess_OwnerOrganizationalProcess": [
+            {
+              "id": "XXXX{][]ss",
+              "name": "udud907082072eef33'..']p/./../."
+            }
+          ]
+        },
+        {
+          "id": "THREE",
+          "name": "[Duplicated - CHARVE] Organization processs",
+          "organizationalProcess_OwnerOrganizationalProcess": [
+            {
+              "id": "XXXX{][]ss",
+              "name": "udud907082072eef33'..']p/./../."
+            }
+          ]
+        },
+        {
+          "id": "FOUR",
+          "name": "[Duplicated - CHARVE] Organization processs",
+          "organizationalProcess_OwnerOrganizationalProcess": [
+            {
+              "id": "XXXX{][]ss",
+              "name": "udud907082072eef33'..']p/./../."
+            }
+          ]
+        },
+        {
+          "id": "FIVE",
+          "name": "[Duplicated - CHARVE] Organization processs",
+          "organizationalProcess_OwnerOrganizationalProcess": [
+            {
+              "id": "XXXX{][]ss",
+              "name": "udud907082072eef33'..']p/./../."
+            }
+          ]
+        },
+        {
+          "id": "SIX",
+          "name": "[Duplicated - CHARVE] Organization processs",
+          "organizationalProcess_OwnerOrganizationalProcess": [
+            {
+              "id": "XXXX{][]ss",
+              "name": "udud907082072eef33'..']p/./../."
+            }
+          ]
+        },
+        {
+          "id": "SEVEN",
+          "name": "[Duplicated - CHARVE] Organization processs",
+          "organizationalProcess_OwnerOrganizationalProcess": [
+            {
+              "id": "XXXX{][]ss",
+              "name": "udud907082072eef33'..']p/./../."
+            }
+          ]
+        }
+      ]
+    }
+  }
 }
